@@ -15,7 +15,7 @@
 
 ### Association
 has_many :items
-has_many :recodes
+has_many :user_items
 
 ## items テーブル
 
@@ -29,51 +29,44 @@ has_many :recodes
 |prefectures_id    |integer   |null: false                  |
 |preparation_day_id|integer   |null: false                  |
 |value             |integer   |null: false                  |
-|user_id           |references|null: false,foreign_key: true|
+|user              |references|null: false,foreign_key: true|
 
 
 ### Association
 belongs_to :user
-belongs_to :recode
+has_one :user_item
 belongs_to_active_hash :category
 belongs_to_active_hash :condition
 belongs_to_active_hash :postage_type
 belongs_to_active_hash :prefectures
 belongs_to_active_hash :value
 
-## recodes
+## user_items
 
-| Colum           | Type     | Options                     |
-| --------------- | -------- | --------------------------- |
-|item             |string    |null: false                  |
-|user             |string    |null: false                  |
-|purchase_id      |integer   |null: false                  |
+| Colum   | Type     | Options                     |
+| ------- | -------- | ----------------------------|
+|item     |references|null: false,foreign_key: true|
+|user     |references|null: false,foreign_key: true|
 
 ### Association
 belongs_to :user
-has_one :item
-has_one :purchase
+belongs_to :item
+has_one :address
 
-
-
-
-
-
-## purchasesテーブル
+## addressテーブル
 
 | Colum        | Type     | Options                     |
 | ------------ | -------- | --------------------------- |
-|user_address  |integer   |null: false                  |
-|post_number   |integer   |null: false                  |
+|post_number   |string    |null: false                  |
 |prefectures   |integer   |null: false                  |
 |city          |string    |null: false                  |
 |address       |string    |null: false                  |
 |building_name |string    |null: false                  |
-|phone_number  |integer   |null: false                  |
+|phone_number  |string    |null: false                  |
+|user_item     |references|null: false,foreign_key: true|
 
 
 ### Association
-belongs_to recode
-has_many :items
-belongs_to_active_hash :prefectures
+belongs_to user_item
+
 
