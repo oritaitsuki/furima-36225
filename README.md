@@ -2,16 +2,16 @@
 
 ## users テーブル
 
-| Colum                | Type    | Options     |
-| -------------------  | ------  | ----------  |
-|email                 |string   |null: false  |
-|encrypted_password    |string   |null: false  |
-|nickname              |string   |null: false  |
-|first_name            |string   |null: false  |
-|family_name           |string   |null: false  |
-|read_first            |string   |null: false  |
-|read_family           |string   |null: false  |
-|birth                 |date     |null: false  |
+| Colum                | Type    | Options                   |
+| -------------------  | ------  | ------------------------  |
+|email                 |string   |null: false, unique: true  |
+|encrypted_password    |string   |null: false                |
+|nickname              |string   |null: false                |
+|first_name            |string   |null: false                |
+|family_name           |string   |null: false                |
+|read_first            |string   |null: false                |
+|read_family           |string   |null: false                |
+|birth                 |date     |null: false                |
 
 ### Association
 has_many :items
@@ -58,10 +58,10 @@ has_one :address
 | Colum        | Type     | Options                     |
 | ------------ | -------- | --------------------------- |
 |post_number   |string    |null: false                  |
-|prefectures   |integer   |null: false                  |
+|prefectures_id|integer   |null: false                  |
 |city          |string    |null: false                  |
 |address       |string    |null: false                  |
-|building_name |string    |null: false                  |
+|building_name |string    |                             |
 |phone_number  |string    |null: false                  |
 |user_item     |references|null: false,foreign_key: true|
 
