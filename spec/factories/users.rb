@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :user do
     nickname              { 'tarou' }
-    email                 { 'sample@gmail.com' }
-    password              { '123456' }
-    encrypted_password    { '123456' }
+    email                 {Faker::Internet.free_email}
+    password              { '12345a' }
+    password_confirmation { '12345a' }
     family_name           { '山田' }
     read_family           { 'ヤマダ' }
     first_name            { '太郎' }
@@ -11,3 +11,5 @@ FactoryBot.define do
     birth                 { '2000-01-01' }
   end
 end
+
+# '1a'+ 

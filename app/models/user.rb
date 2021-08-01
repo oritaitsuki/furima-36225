@@ -11,7 +11,8 @@ class User < ApplicationRecord
     validates :read_first
     validates :read_family
   end
-  validates :encrypted_password, presence: true, length: { minimum: 6 }
+  PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
+  validates_format_of :password, presence: true, length: { minimum: 6 }, with: PASSWORD_REGEX, message: 'には英字と数字の両方を含めて設定してください' 
   validates :nickname, presence: true
   validates :birth, presence: true
 end
