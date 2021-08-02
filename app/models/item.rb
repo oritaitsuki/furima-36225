@@ -25,7 +25,7 @@ class Item < ApplicationRecord
   validates :item_name, presence: true
   validates :explanation, presence: true
 
-
+  validates :value, presence: true, inclusion: { in: 300..9_999_999 }, format: { with: /\A[0-9]+\z/ }
  
   
   has_one_attached :image

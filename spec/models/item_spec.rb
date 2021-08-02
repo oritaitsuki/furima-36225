@@ -59,6 +59,22 @@ RSpec.describe Item, type: :model do
     @item.valid?
     expect(@item.errors.full_messages).to include("Value can't be blank")
    end
+   it '価格が半角数字以外登録できない'do
+     @item.value = '１２３４５'
+     @item.valid?
+     expect(@item.errors.full_messages).to include("Value is not included in the list")
+   end
+   it '価格が300以下の場合登録できない'do
+     @item.value = '299'
+     @item.valid?
+     expect(@item.errors.full_messages).to include("Value is not included in the list")
+   end
+   it '価格が9999999以上の場合登録できない'do
+   @item.value = '10000000'
+   @item.valid?
+   expect(@item.errors.full_messages).to include("Value is not included in the list")
+   end
+
 
 
 
