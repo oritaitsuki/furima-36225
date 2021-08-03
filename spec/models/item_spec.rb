@@ -29,7 +29,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Explanation can't be blank")
       end
       it 'カテゴリーが選択されていないと登録できない' do
-        @item.category_id =  1
+        @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
@@ -79,9 +79,14 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Value is not included in the list')
       end
       it '価格が9999999以上の場合登録できない' do
-        @item.value = 10000000
+        @item.value = 10_000_000
         @item.valid?
         expect(@item.errors.full_messages).to include('Value is not included in the list')
+      end
+      it 'ユーザー情報がない場合は登録できないこと' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end

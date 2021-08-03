@@ -1,7 +1,6 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
-  
-  
+
   with_options presence: true, numericality: { other_than: 1, message: "can't be blank" } do
     validates :category_id
     validates :condition_id
@@ -10,13 +9,13 @@ class Item < ApplicationRecord
     validates :preparation_day_id
   end
   with_options presence: true do
-   validates :image 
-   validates :item_name
-   validates :explanation
-   validates :value, inclusion: { in: 300..9_999_999 }, format: { with: /\A[0-9]+\z/ }
+    validates :image
+    validates :item_name
+    validates :explanation
+    validates :value, inclusion: { in: 300..9_999_999 }, format: { with: /\A[0-9]+\z/ }
   end
 
   has_one_attached :image
   belongs_to :user
-  #has_one :user_item
+  # has_one :user_item
 end
