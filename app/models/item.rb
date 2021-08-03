@@ -18,5 +18,9 @@ class Item < ApplicationRecord
   has_one_attached :image
   belongs_to :user
   belongs_to :postage_type
+  belongs_to :category
+  belongs_to :condition
+  belongs_to :prefectures
+  belongs_to :preparation_day
   # has_one :user_item
 end
