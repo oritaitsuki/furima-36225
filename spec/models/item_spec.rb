@@ -63,6 +63,16 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Value is not included in the list')
       end
+      it '金額が半角英数混合では登録できないこと' do
+        @item.value = 'a1234bcd'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Value is not included in the list')
+      end
+      it '金額が半角英語だけでは登録できないこと' do
+        @item.value = 'abcde'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Value is not included in the list')
+      end
       it '価格が300以下の場合登録できない' do
         @item.value = 299
         @item.valid?
