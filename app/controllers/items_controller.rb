@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update]
-  before_action :get_params, only: [:show, :edit, :update]
+  before_action :get_item_params, only: [:show, :edit, :update]
   def index
     @items = Item.includes(:user).order('created_at DESC')
   end
@@ -46,7 +46,7 @@ class ItemsController < ApplicationController
     redirect_to action: :index unless @item.user_id == current_user.id
   end
 
-  def get_params
+  def get_item_params
     @item = Item.find(params[:id])
   end
 end
