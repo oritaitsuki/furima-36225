@@ -1,4 +1,4 @@
-class Adress < ApplicationRecord
+class Address < ApplicationRecord
   with_options presence: true, numericality: { other_than: 1, message: "can't be blank" } do
     validates :prefectures_id
   end
@@ -9,5 +9,8 @@ class Adress < ApplicationRecord
     validates :address
     validates :phone_number
   end
-    belongs_to user_item
+  attr_accessor :token
+    belongs_to :user_item
+    validates :token, presence: true
+
 end
