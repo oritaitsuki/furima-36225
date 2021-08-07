@@ -2,7 +2,7 @@ class AddressesController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
   before_action :get_item_params, only: [:index, :create]
   before_action :move_to_root_path, only: [:index, :create]
-  
+  before_action :sold_out,only: [:index, :create]
   def index
   
     @items = Item.find(params[:item_id])
@@ -25,6 +25,12 @@ class AddressesController < ApplicationController
   
   def move_to_root_path
     redirect_to root_path if @items.user_id == current_user.id
+  end
+
+  def sold_out
+    unless @items.user_item==nil
+      redirect_to root_path
+    end
   end
  
   def get_item_params
