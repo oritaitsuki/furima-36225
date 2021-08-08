@@ -10,7 +10,7 @@ class Address < ApplicationRecord
     validates :phone_number
   end
   attr_accessor :token
-    belongs_to :user_item
-    validates :token, presence: true
 
+  belongs_to :user_item
+  validates :token, presence: true
 end

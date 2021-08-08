@@ -2,52 +2,43 @@ class AddressesController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
   before_action :get_item_params, only: [:index, :create]
   before_action :move_to_root_path, only: [:index, :create]
-  before_action :sold_out,only: [:index, :create]
+
   def index
-  
-    @items = Item.find(params[:item_id])
     @user_item_address = UserItemAddress.new
   end
 
   def create
-    @user_item_address=UserItemAddress.new(user_item_address_params)
+    @user_item_address = UserItemAddress.new(user_item_address_params)
     if @user_item_address.valid?
       pay_item
       @user_item_address.save
-      return redirect_to root_path
+      redirect_to root_path
     else
       render 'index'
     end
   end
-  
+
   private
 
-  
   def move_to_root_path
-    redirect_to root_path if @items.user_id == current_user.id
+    redirect_to root_path unless @item.user_id = !current_user.id || @item.user_item.nil?
   end
 
-  def sold_out
-    unless @items.user_item==nil
-      redirect_to root_path
-    end
-  end
- 
   def get_item_params
-    @items = Item.find(params[:item_id])
+    @item = Item.find(params[:item_id])
   end
- 
+
   def user_item_address_params
-    params.require(:user_item_address).permit(:post_number, :prefectures_id, :city, :phone_number, 
-      :building_name, :address).merge(user_id: current_user.id, token: params[:token], item_id: params[:item_id]) 
+    params.require(:user_item_address).permit(:post_number, :prefectures_id, :city, :phone_number,
+                                              :building_name, :address).merge(user_id: current_user.id, token: params[:token], item_id: params[:item_id])
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
-      amount:@items.value,  
-      card: user_item_address_params[:token],    
-      currency: 'jpy'                
+      amount: @items.value,
+      card: user_item_address_params[:token],
+      currency: 'jpy'
     )
   end
 end
