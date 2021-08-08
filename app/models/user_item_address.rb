@@ -19,6 +19,6 @@ class UserItemAddress
   def save
     user_item = UserItem.create(item_id: item_id, user_id: user_id)
     Address.create(post_number: post_number, prefectures_id: prefectures_id, city: city, address: address,
-                   building_name: building_name, phone_number: phone_number, token: token, user_item_id: user_item.id)
+                   building_name: building_name, phone_number: phone_number, user_item_id: user_item.id)
   end
 end

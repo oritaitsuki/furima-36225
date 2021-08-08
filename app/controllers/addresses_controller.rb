@@ -21,7 +21,7 @@ class AddressesController < ApplicationController
   private
 
   def move_to_root_path
-    redirect_to root_path if @item.user_id == current_user.id || @item.user_item.present?
+    redirect_to root_path if @item.user_id != current_user.id || @item.user_item.present?
   end
 
   def get_item_params
@@ -36,7 +36,7 @@ class AddressesController < ApplicationController
   def pay_item
     Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
-      amount: @items.value,
+      amount: @item.value,
       card: user_item_address_params[:token],
       currency: 'jpy'
     )
