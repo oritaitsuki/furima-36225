@@ -22,5 +22,5 @@ class Item < ApplicationRecord
   belongs_to :condition
   belongs_to :prefectures
   belongs_to :preparation_day
-  # has_one :user_item
+  has_one :user_item
 end
