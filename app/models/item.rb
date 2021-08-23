@@ -9,13 +9,13 @@ class Item < ApplicationRecord
     validates :preparation_day_id
   end
   with_options presence: true do
-    validates :image
+    validates :images
     validates :item_name
     validates :explanation
     validates :value, inclusion: { in: 300..9_999_999 }, format: { with: /\A[0-9]+\z/ }
   end
 
-  has_one_attached :image
+  has_many_attached :images
   belongs_to :user
   belongs_to :postage_type
   belongs_to :category
